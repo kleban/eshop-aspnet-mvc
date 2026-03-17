@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="eShop.App/eShopMVC.App.csproj" Id="0a066b34-ea31-48b1-9588-9396fec7b48b" />
+  <Project Path="eShop.Core/eShop.Domain.csproj" Id="9e907ec5-8b87-4c9b-8647-153b7a9e698e" />
+  <Project Path="eShop.Infrastructure/eShop.Infrastructure.csproj" Id="87ef7ce9-ab4b-4218-9936-57783f2c5add" />
+</Solution>

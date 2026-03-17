@@ -1,0 +1,38 @@
+﻿@using eShop.Domain.Entities
+@model IEnumerable<CategoryViewModel>
+
+<div class="row pt-4 pb-23">
+    <div class="col-6">
+        <h2 class="text-primary">Категорії</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="category" asp-action="create" class="btn btn-primary">
+            <i class="bi bi-plus-circle">Create New Category</i>
+        </a>
+    </div>
+</div>
+
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>Catgory</th>
+        <th>Disaply Order</th>
+        <th>Actions</th>
+    </tr>
+    @foreach(var c in Model)
+    {
+        <tr>
+            <td>@c.Name</td>
+            <td>@c.DisplayOrder</td>
+            <td>
+                <div class="btn-group w-100" role="group">
+                    <a asp-controller="category" asp-action="Edit" asp-route-id="@c.Id" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a asp-controller="category" asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger">
+                        <i class="bi bi-trash-fill"></i> Delete
+                    </a>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
