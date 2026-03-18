@@ -8,6 +8,7 @@ namespace eShopMVC.App.ViewModels.Category
     {
         [DisplayName("Назва категорії")]
         [Required(ErrorMessage = "Поле не може бути пустим")]
+        [MinLength(3, ErrorMessage = "Назва категорії повинна бути > 3 символів")]
         public string Name { get; set; } = string.Empty;
 
         [DisplayName("Порядок")]

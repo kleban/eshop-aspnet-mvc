@@ -16,12 +16,15 @@ public class CategoryController : Controller
 
     public IActionResult Index()
     {
+        //AutoMapper $$$
+        //Mapster
+        //Mapping
         var categories = _unitOfWork.Category.GetAll().Select(c => new CategoryViewModel
         {
             Id = c.Id,
             Name = c.Name,
             DisplayOrder = c.DisplayOrder
-        }).OrderBy(x=> x.DisplayOrder).ToList();
+        }).OrderBy(x => x.DisplayOrder).ToList();
 
         return View(categories);
     }
@@ -36,7 +39,7 @@ public class CategoryController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateCategoryViewModel model)
     {
-        if(model.Name == model.DisplayOrder.ToString())
+        if (model.Name == model.DisplayOrder.ToString())
         {
             ModelState.AddModelError("Name", "Назва не може бути такою ж як порядок виведення категорії.");
         }

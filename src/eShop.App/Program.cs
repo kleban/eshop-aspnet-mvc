@@ -13,7 +13,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryViewModelValidator>();
 
 builder.Services.AddDbContext<ShopContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("eShopConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("eShopConnection")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();

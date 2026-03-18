@@ -15,7 +15,7 @@ namespace eShop.Infrastructure.Interfaces
             Expression<Func<T, bool>> filter,
             string? includeProperties = null,
             bool tracked = false);
-
+ 
         void Add(T entity);
 
         void Remove(T entity);

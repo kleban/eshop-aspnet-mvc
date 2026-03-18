@@ -14,8 +14,7 @@ namespace eShop.Infrastructure.Context
             builder.Entity<Category>().HasData(
             new Category { Id = 1, Name = "Ноутбуки", DisplayOrder = 1 },
             new Category { Id = 2, Name = "Планшети", DisplayOrder = 2 },
-            new Category { Id = 3, Name = "Телефони", DisplayOrder = 3 }
-        );
+            new Category { Id = 3, Name = "Телефони", DisplayOrder = 3 });
         }
     }
 }
