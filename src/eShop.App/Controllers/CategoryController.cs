@@ -1,6 +1,7 @@
 ﻿using eShop.Domain.Entities;
 using eShop.Infrastructure.Interfaces;
 using eShopMVC.App.ViewModels.Category;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eShopMVC.App.Controllers;
@@ -23,12 +24,14 @@ public class CategoryController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin,Manager")]
     public IActionResult Create()
     {
         return View(new CreateCategoryViewModel());
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin,Manager")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateCategoryViewModel model)
     {
@@ -55,6 +58,7 @@ public class CategoryController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin,Manager")]
     public IActionResult Edit(int? id)
     {
         if (id is null || id == 0)
@@ -80,6 +84,7 @@ public class CategoryController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin,Manager")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(CategoryViewModel model)
     {
@@ -104,6 +109,7 @@ public class CategoryController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public IActionResult Delete(int? id)
     {
         if (id is null || id == 0)
@@ -129,6 +135,7 @@ public class CategoryController : BaseController
     }
 
     [HttpPost, ActionName("Delete")]
+    [Authorize(Roles = "Admin")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeletePost(int? id)
     {

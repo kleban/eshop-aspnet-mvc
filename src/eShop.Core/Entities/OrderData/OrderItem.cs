@@ -19,7 +19,7 @@ namespace eShop.Domain.Entities.OrderData
         public int? UnitId { get; set; }
 
         // Для Serialized
-        public List<OrderItemProductItem> ProductItems { get; set; } = new();
+        public List<ProductItem> ProductItems { get; set; } = new();
 
         public decimal Price { get; set; }
     }
