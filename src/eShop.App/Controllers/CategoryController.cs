@@ -5,17 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eShopMVC.App.Controllers;
 
-public class CategoryController : Controller
+public class CategoryController : BaseController
 {
-    private readonly IUnitOfWork _unitOfWork;
-
-    public CategoryController(IUnitOfWork unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
-    }
+    public CategoryController(IUnitOfWork unitOfWork): base(unitOfWork) { }
 
     public IActionResult Index()
-    {
+    { 
         var categories = _unitOfWork.Category.GetAll().Select(c => new CategoryViewModel
         {
             Id = c.Id,

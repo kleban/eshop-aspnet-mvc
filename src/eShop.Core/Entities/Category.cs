@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using eShop.Domain.Entities.ProductData;
+using System.ComponentModel.DataAnnotations;
 
 namespace eShop.Domain.Entities
 {
-    public class Category : BaseEntity<int>
+    public class Category : NamedBaseEntity<int>
     {
-        public string Name { get; set; } = string.Empty;
         public int DisplayOrder { get; set; }
+       // public virtual ICollection<Product> Products { get; get; }
     }
 }
