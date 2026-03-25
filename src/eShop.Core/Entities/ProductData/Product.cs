@@ -1,3 +1,4 @@
+using eShop.Domain.Entities.CategoryData;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 

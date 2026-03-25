@@ -1,4 +1,4 @@
-﻿using eShop.Domain.Entities;
+﻿using eShop.Domain.Entities.CategoryData;
 using System;
 using System.Collections.Generic;
 using System.Text;

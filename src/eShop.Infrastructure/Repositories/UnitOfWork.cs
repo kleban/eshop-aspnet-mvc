@@ -12,12 +12,16 @@ namespace eShop.Infrastructure.Repositories
 
         public ICategoryRepository Category { get; }
         public IAddressRepository Address { get; }
+        public IProductRepository Product { get; }
+        public IRepository<eShop.Domain.Entities.ProductData.UnitOfMeasure> Unit { get; }
 
         public UnitOfWork(ShopContext ctx)
         {
             _ctx = ctx;
             Category = new CategoryRepository(_ctx);
             Address  = new AddressRepository(_ctx);
+            Product  = new ProductRepository(_ctx);
+            Unit     = new Repository<eShop.Domain.Entities.ProductData.UnitOfMeasure>(_ctx);
         }
 
         public void Save()

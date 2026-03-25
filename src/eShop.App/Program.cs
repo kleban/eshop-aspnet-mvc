@@ -37,6 +37,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
@@ -58,7 +59,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Product}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 app.Run();

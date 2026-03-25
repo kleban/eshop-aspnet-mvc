@@ -1,0 +1,40 @@
+@model eShopMVC.App.ViewModels.Product.ProductViewModel
+@{
+    ViewData["Title"] = "Видалення товару";
+}
+
+<div class="row pt-4 pb-3">
+    <div class="col"><h2>Видалення товару</h2></div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-body">
+                <p class="text-danger fw-semibold">Ви впевнені, що хочете видалити цей товар?</p>
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Назва</dt>
+                    <dd class="col-sm-8">@Model.Name</dd>
+                    <dt class="col-sm-4">Категорія</dt>
+                    <dd class="col-sm-8">@(Model.CategoryName ?? "—")</dd>
+                    <dt class="col-sm-4">Тип</dt>
+                    <dd class="col-sm-8">@Model.TypeDisplay</dd>
+                    <dt class="col-sm-4">Ціна</dt>
+                    <dd class="col-sm-8">@Model.Price.ToString("N2") грн</dd>
+                    @if (!string.IsNullOrWhiteSpace(Model.Description))
+                    {
+                        <dt class="col-sm-4">Опис</dt>
+                        <dd class="col-sm-8 text-muted">@Model.Description</dd>
+                    }
+                </dl>
+            </div>
+            <div class="card-footer d-flex gap-2">
+                <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">Так, видалити</button>
+                </form>
+                <a asp-action="Manage" class="btn btn-outline-secondary">Скасувати</a>
+            </div>
+        </div>
+    </div>
+</div>

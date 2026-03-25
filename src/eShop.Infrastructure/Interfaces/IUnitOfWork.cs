@@ -8,6 +8,8 @@ namespace eShop.Infrastructure.Interfaces
     {
         ICategoryRepository Category { get; }
         IAddressRepository Address { get; }
+        IProductRepository Product { get; }
+        IRepository<eShop.Domain.Entities.ProductData.UnitOfMeasure> Unit { get; }
         void Save();
         Task SaveAsync();
     }

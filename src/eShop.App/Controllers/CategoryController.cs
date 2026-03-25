@@ -1,4 +1,4 @@
-﻿using eShop.Domain.Entities;
+﻿using eShop.Domain.Entities.CategoryData;
 using eShop.Infrastructure.Interfaces;
 using eShopMVC.App.ViewModels.Category;
 using Microsoft.AspNetCore.Authorization;

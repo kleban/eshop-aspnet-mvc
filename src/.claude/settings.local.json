@@ -3,7 +3,8 @@
     "allow": [
       "Bash(dotnet ef:*)",
       "Bash(dotnet tool:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(grep -rn \"using eShop.Domain.Entities;\" E:eshop-aspnet-mvcsrceShop.Infrastructure --include=*.cs)"
     ]
   }
 }

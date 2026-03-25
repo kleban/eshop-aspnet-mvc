@@ -1,4 +1,3 @@
-using eShop.Domain.Entities;
 using eShop.Domain.Entities.CardData;
 using eShop.Domain.Entities.OrderData;
 using eShop.Domain.Entities.ProductData;
@@ -7,6 +6,7 @@ using eShop.Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using User = eShop.Infrastructure.Entities.User;
 using Microsoft.EntityFrameworkCore;
+using eShop.Domain.Entities.CategoryData;
 
 namespace eShop.Infrastructure.Context
 {

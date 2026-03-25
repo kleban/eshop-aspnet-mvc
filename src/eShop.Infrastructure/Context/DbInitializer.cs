@@ -1,3 +1,4 @@
+using eShop.Domain.Entities.ProductData;
 using eShop.Domain.Entities.UserData;
 using eShop.Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,8 @@ namespace eShop.Infrastructure.Context
             using var scope = serviceProvider.CreateScope();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
             var db = scope.ServiceProvider.GetRequiredService<ShopContext>();
+
+            await SeedProductsAsync(db);
 
             var admin = await CreateUserAsync(userManager,
                 email: "admin@eshop.com", password: "Admin123!",
@@ -89,6 +92,79 @@ namespace eShop.Infrastructure.Context
                         IsDefault   = false
                     }
                 });
+        }
+
+        // ── Products ─────────────────────────────────────────────────────────────
+
+        private static async Task SeedProductsAsync(ShopContext db)
+        {
+            if (await db.Products.AnyAsync()) return;
+
+            var products = new[]
+            {
+                // Ноутбуки (CategoryId = 1)
+                new Product
+                {
+                    Name        = "Ноутбук ASUS VivoBook 15",
+                    Description = "15.6\" Full HD, Intel Core i5, 8 ГБ RAM, 512 ГБ SSD, Windows 11",
+                    Price       = 24999m,
+                    Type        = ProductType.Serialized,
+                    CategoryId  = 1,
+                    BaseUnitId  = 1
+                },
+                new Product
+                {
+                    Name        = "Ноутбук Lenovo IdeaPad 3",
+                    Description = "15.6\" Full HD, AMD Ryzen 5, 16 ГБ RAM, 256 ГБ SSD, без ОС",
+                    Price       = 19499m,
+                    Type        = ProductType.Serialized,
+                    CategoryId  = 1,
+                    BaseUnitId  = 1
+                },
+
+                // Планшети (CategoryId = 2)
+                new Product
+                {
+                    Name        = "Планшет Samsung Galaxy Tab A9",
+                    Description = "10.1\", 4 ГБ RAM, 64 ГБ, Wi-Fi, Android 14",
+                    Price       = 9999m,
+                    Type        = ProductType.Serialized,
+                    CategoryId  = 2,
+                    BaseUnitId  = 1
+                },
+                new Product
+                {
+                    Name        = "Планшет Apple iPad 10",
+                    Description = "10.9\", Apple A14 Bionic, 64 ГБ, Wi-Fi, iPadOS 17",
+                    Price       = 16999m,
+                    Type        = ProductType.Serialized,
+                    CategoryId  = 2,
+                    BaseUnitId  = 1
+                },
+
+                // Телефони (CategoryId = 3)
+                new Product
+                {
+                    Name        = "Смартфон Samsung Galaxy A55",
+                    Description = "6.6\" Super AMOLED, Exynos 1480, 8 ГБ RAM, 128 ГБ, 5G",
+                    Price       = 14999m,
+                    Type        = ProductType.Serialized,
+                    CategoryId  = 3,
+                    BaseUnitId  = 1
+                },
+                new Product
+                {
+                    Name        = "Смартфон Xiaomi Redmi Note 13",
+                    Description = "6.67\" AMOLED, Snapdragon 685, 6 ГБ RAM, 128 ГБ, 108 Мп камера",
+                    Price       = 8499m,
+                    Type        = ProductType.Serialized,
+                    CategoryId  = 3,
+                    BaseUnitId  = 1
+                },
+            };
+
+            db.Products.AddRange(products);
+            await db.SaveChangesAsync();
         }
 
         // ── Helpers ──────────────────────────────────────────────────────────────
