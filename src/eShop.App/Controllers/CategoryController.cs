@@ -10,13 +10,14 @@ public class CategoryController : BaseController
     public CategoryController(IUnitOfWork unitOfWork): base(unitOfWork) { }
 
     public IActionResult Index()
-    { 
+    {
+
         var categories = _unitOfWork.Category.GetAll().Select(c => new CategoryViewModel
         {
             Id = c.Id,
             Name = c.Name,
             DisplayOrder = c.DisplayOrder
-        }).OrderBy(x=> x.DisplayOrder).ToList();
+        }).OrderBy(x => x.DisplayOrder).ToList();
 
         return View(categories);
     }
@@ -31,7 +32,7 @@ public class CategoryController : BaseController
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateCategoryViewModel model)
     {
-        if(model.Name == model.DisplayOrder.ToString())
+        if (model.Name == model.DisplayOrder.ToString())
         {
             ModelState.AddModelError("Name", "Назва не може бути такою ж як порядок виведення категорії.");
         }

@@ -15,6 +15,7 @@ namespace eShop.Infrastructure.Repositories
 
         public void Update(Category entity)
         {
+
             var categoryFromDb = _ctx.Categories.FirstOrDefault(x => x.Id == entity.Id);
 
             if (categoryFromDb is not null)
