@@ -1,9 +1,6 @@
-﻿using eShop.Domain.Entities.ProductData;
-using eShop.Domain.Entities.UserData;
-using System;
+using eShop.Domain.Entities.ProductData;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace eShop.Domain.Entities.CardData
 {
@@ -11,9 +8,10 @@ namespace eShop.Domain.Entities.CardData
     {
         public int Id { get; set; }
 
-        [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
-        public User? User { get; set; }
-        public ICollection<CartItem> Items { get; set; } = new HashSet<CartItem>();
+        // Identity string GUID — навігаційна властивість до User відсутня навмисно
+        // (User живе в Infrastructure, Core не залежить від нього)
+        public string UserId { get; set; } = string.Empty;
+
+        public ICollection<CartItem> Items { get; set; } = new List<CartItem>();
     }
 }

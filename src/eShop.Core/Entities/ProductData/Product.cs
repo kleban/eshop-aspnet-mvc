@@ -1,23 +1,29 @@
-﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace eShop.Domain.Entities.ProductData
 {
     public class Product : BaseEntity<int>
     {
-        public string? Name { get; set; }
-        public Category? Category { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public decimal Price { get; set; }
+
+        public ProductType Type { get; set; }
 
         [ForeignKey(nameof(Category))]
         public int? CategoryId { get; set; }
-        public string? Description { get; set; }
-        public double Quantity { get; set; }
-        public decimal Price { get; set; }
-        [ForeignKey(nameof(UnitOfMeasure))]
-        public int? BaseUnitId { get; set; } // для Bulk або Countable
-        public UnitOfMeasure BaseUnit { get; set; }
+        public Category? Category { get; set; }
+
+        // Одиниця виміру — для Bulk (кг, л, м) та Countable (шт)
+        // Для Serialized не використовується
+        [ForeignKey(nameof(BaseUnit))]
+        public int? BaseUnitId { get; set; }
+        public UnitOfMeasure? BaseUnit { get; set; }
+
         public virtual ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
+
+        // Serialized: окремі екземпляри з серійними номерами
+        public virtual ICollection<ProductItem> Items { get; set; } = new List<ProductItem>();
     }
 }
