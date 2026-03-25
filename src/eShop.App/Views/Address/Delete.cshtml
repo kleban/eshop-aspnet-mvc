@@ -1,0 +1,47 @@
+@model eShopMVC.App.ViewModels.Address.AddressViewModel
+@{
+    ViewData["Title"] = "Видалення адреси";
+}
+
+<div class="row pt-4 pb-3">
+    <div class="col">
+        <h2>Видалення адреси</h2>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-body">
+                <p class="text-danger fw-semibold">Ви впевнені, що хочете видалити цю адресу?</p>
+
+                @if (Model.IsDefault)
+                {
+                    <div class="alert alert-warning py-2">
+                        Це ваша <strong>основна адреса</strong>. Після видалення основна адреса не буде встановлена.
+                    </div>
+                }
+
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Отримувач</dt>
+                    <dd class="col-sm-8">@Model.FirstName @Model.LastName</dd>
+                    <dt class="col-sm-4">Телефон</dt>
+                    <dd class="col-sm-8">@Model.PhoneNumber</dd>
+                    <dt class="col-sm-4">Адреса</dt>
+                    <dd class="col-sm-8">@Model.AddressLine</dd>
+                    <dt class="col-sm-4">Місто</dt>
+                    <dd class="col-sm-8">@Model.PostalCode, @Model.City@(!string.IsNullOrWhiteSpace(Model.Region) ? $", {Model.Region}" : "")</dd>
+                    <dt class="col-sm-4">Країна</dt>
+                    <dd class="col-sm-8">@Model.Country</dd>
+                </dl>
+            </div>
+            <div class="card-footer d-flex gap-2">
+                <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">Так, видалити</button>
+                </form>
+                <a asp-action="Index" class="btn btn-outline-secondary">Скасувати</a>
+            </div>
+        </div>
+    </div>
+</div>

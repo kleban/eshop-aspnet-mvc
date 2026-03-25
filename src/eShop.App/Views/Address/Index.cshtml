@@ -1,0 +1,61 @@
+@model IEnumerable<eShopMVC.App.ViewModels.Address.AddressViewModel>
+@{
+    ViewData["Title"] = "Мої адреси";
+}
+
+<div class="row pt-4 pb-3">
+    <div class="col">
+        <h2>Мої адреси доставки</h2>
+    </div>
+    <div class="col-auto">
+        <a asp-action="Create" class="btn btn-primary">+ Додати адресу</a>
+    </div>
+</div>
+
+@if (TempData["Success"] is string msg)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @msg
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">У вас ще немає збережених адрес.</div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var address in Model)
+        {
+            <div class="col">
+                <div class="card h-100 @(address.IsDefault ? "border-primary" : "")">
+                    <div class="card-body">
+                        @if (address.IsDefault)
+                        {
+                            <span class="badge bg-primary mb-2">Основна</span>
+                        }
+                        <h5 class="card-title mb-1">@address.FirstName @address.LastName</h5>
+                        <p class="card-text mb-1 text-muted">@address.PhoneNumber</p>
+                        <p class="card-text mb-1">@address.AddressLine</p>
+                        <p class="card-text">@address.PostalCode, @address.City@(!string.IsNullOrWhiteSpace(address.Region) ? $", {address.Region}" : "")</p>
+                        <p class="card-text text-muted small">@address.Country</p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@address.Id" class="btn btn-sm btn-outline-secondary">Редагувати</a>
+                        <a asp-action="Delete" asp-route-id="@address.Id" class="btn btn-sm btn-outline-danger">Видалити</a>
+                        @if (!address.IsDefault)
+                        {
+                            <form asp-action="SetDefault" method="post" class="ms-auto">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@address.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Зробити основною</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -11,11 +11,13 @@ namespace eShop.Infrastructure.Repositories
         private readonly ShopContext _ctx;
 
         public ICategoryRepository Category { get; }
+        public IAddressRepository Address { get; }
 
         public UnitOfWork(ShopContext ctx)
         {
             _ctx = ctx;
             Category = new CategoryRepository(_ctx);
+            Address  = new AddressRepository(_ctx);
         }
 
         public void Save()

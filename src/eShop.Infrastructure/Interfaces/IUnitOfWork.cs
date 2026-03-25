@@ -7,6 +7,7 @@ namespace eShop.Infrastructure.Interfaces
     public interface IUnitOfWork
     {
         ICategoryRepository Category { get; }
+        IAddressRepository Address { get; }
         void Save();
         Task SaveAsync();
     }
