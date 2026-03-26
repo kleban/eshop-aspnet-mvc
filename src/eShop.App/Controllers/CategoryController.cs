@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eShopMVC.App.Controllers;
 
+[Authorize]
 public class CategoryController : BaseController
 {
     public CategoryController(IUnitOfWork unitOfWork): base(unitOfWork) { }
