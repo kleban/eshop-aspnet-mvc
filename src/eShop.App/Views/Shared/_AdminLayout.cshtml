@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<partial name="_AdminLayoutHead" />
+<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <partial name="_AdminPageSidebar" />
+    <partial name="_AdminPageHeader" />
+
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+        <div class="pc-content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <partial name="_AdminPageFooter" />
+ 
+    <partial name="_AdminLayoutJsFooter" />
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

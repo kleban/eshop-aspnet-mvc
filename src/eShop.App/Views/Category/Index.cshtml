@@ -1,46 +1,70 @@
 ﻿@using eShop.Domain.Entities
+
 @model IEnumerable<CategoryViewModel>
+@{
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Категорії";
+    ViewData["description"] = "Опис категорій магазину";
+    ViewData["keywords"] = string.Join(",", Model.Select(x => x.Name).ToList());
+}
 
-<div class="row pt-4 pb-23">
-    <div class="col-6">
-        <h2 class="text-primary">Категорії</h2>
-    </div>
-    <div class="col-6 text-end">
-        <a asp-controller="category" asp-action="create" class="btn btn-primary">
-            <i class="bi bi-plus-circle">Create New Category</i>
-        </a>
-    </div>
-</div>
-
-<table class="table table-hover table-bordered table-striped">
-    <tr>
-        <th>Catgory</th>
-        <th>Disaply Order</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var c in Model)
-    {
-        <tr>
-            <td>@c.Name</td>
-            <td>@c.DisplayOrder</td>
-            <td style="width: 20%">
-                <div class="btn-group w-100" role="group">          
-                    <a asp-controller="category" asp-action="Edit" asp-route-id="@c.Id" class="btn btn-primary">
-                        <i class="bi bi-pencil-square"></i> Edit
-                    </a>
-                    <a asp-controller="category" asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger">
-                        <i class="bi bi-trash-fill"></i> Delete
-                    </a>
+<!-- [ breadcrumb ] start -->
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Sample Page</h5>
                 </div>
-            </td>
-        </tr>
-    }
-</table>
-
-<hr />
-<div class="row">
-    @foreach (var c in Model)
-    {
-        <partial name="_CategoryCard" />
-    }
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../dashboard/index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript: void(0)">Other</a></li>
+                    <li class="breadcrumb-item" aria-current="page">Sample Page</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- [ breadcrumb ] end -->
+<!-- [ Main Content ] start -->
+<div class="row">
+    <!-- [ sample-page ] start -->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <a asp-controller="category" asp-action="create" class="btn btn-primary float-end">
+                    <i class="bi bi-plus-circle">Create New Category</i>
+                </a>
+                <h5>Список категорій</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-bordered table-striped">
+                    <tr>
+                        <th>Catgory</th>
+                        <th>Disaply Order</th>
+                        <th>Actions</th>
+                    </tr>
+                    @foreach (var c in Model)
+                    {
+                        <tr>
+                            <td>@c.Name</td>
+                            <td>@c.DisplayOrder</td>
+                            <td style="width: 20%">
+                                <div class="btn-group w-100" role="group">
+                                    <a asp-controller="category" asp-action="Edit" asp-route-id="@c.Id" class="btn btn-primary">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <a asp-controller="category" asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger">
+                                        <i class="bi bi-trash-fill"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- [ sample-page ] end -->
+</div>
+<!-- [ Main Content ] end -->
