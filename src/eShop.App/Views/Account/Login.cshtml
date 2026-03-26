@@ -3,35 +3,49 @@
     ViewData["Title"] = "Вхід";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-5">
-        <h2 class="mb-4">Вхід</h2>
-
-        <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" type="email" autocomplete="username" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<div class="row justify-content-center py-4">
+    <div class="col-md-5 col-lg-4">
+        <div class="text-center mb-4">
+            <div style="font-family:'Orbitron',sans-serif;font-size:0.7rem;letter-spacing:0.15em;color:var(--text-dim);text-transform:uppercase;">
+                // АВТОРИЗАЦІЯ
             </div>
+        </div>
 
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" type="password" autocomplete="current-password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+        <div class="auth-panel">
+            <h2 class="auth-title">Вхід</h2>
+            <p class="auth-subtitle">Введіть облікові дані</p>
 
-            <div class="mb-3 form-check">
-                <input asp-for="RememberMe" class="form-check-input" />
-                <label asp-for="RememberMe" class="form-check-label"></label>
-            </div>
+            <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3 py-2" style="font-size:0.85rem;"></div>
 
-            <div class="d-flex gap-2 align-items-center">
-                <button type="submit" class="btn btn-primary">Увійти</button>
-                <a asp-action="Register" class="text-muted small">Немає акаунта? Зареєструватися</a>
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" type="email" autocomplete="username" />
+                    <span asp-validation-for="Email" class="small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" type="password" autocomplete="current-password" />
+                    <span asp-validation-for="Password" class="small"></span>
+                </div>
+
+                <div class="mb-4 form-check">
+                    <input asp-for="RememberMe" class="form-check-input" />
+                    <label asp-for="RememberMe" class="form-check-label"></label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2">Увійти</button>
+
+                <hr class="neon-divider mt-4" />
+
+                <div class="text-center">
+                    <a asp-action="Register" style="font-family:'Rajdhani',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:0.05em;color:var(--text-muted);">
+                        Немає акаунта? <span class="text-neon-cyan">Зареєструватися</span>
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

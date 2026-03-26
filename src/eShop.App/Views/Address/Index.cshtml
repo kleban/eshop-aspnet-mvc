@@ -3,13 +3,9 @@
     ViewData["Title"] = "Мої адреси";
 }
 
-<div class="row pt-4 pb-3">
-    <div class="col">
-        <h2>Мої адреси доставки</h2>
-    </div>
-    <div class="col-auto">
-        <a asp-action="Create" class="btn btn-primary">+ Додати адресу</a>
-    </div>
+<div class="page-header">
+    <h1 class="page-title">Адреси доставки</h1>
+    <a asp-action="Create" class="btn btn-primary btn-sm">+ Додати адресу</a>
 </div>
 
 @if (TempData["Success"] is string msg)
@@ -22,7 +18,10 @@
 
 @if (!Model.Any())
 {
-    <div class="alert alert-info">У вас ще немає збережених адрес.</div>
+    <div class="alert alert-info">
+        <span style="font-family:'Orbitron',sans-serif;font-size:0.75rem;letter-spacing:0.1em;">// ПОРОЖНЬО</span>
+        <br />У вас ще немає збережених адрес доставки.
+    </div>
 }
 else
 {
@@ -30,19 +29,21 @@ else
         @foreach (var address in Model)
         {
             <div class="col">
-                <div class="card h-100 @(address.IsDefault ? "border-primary" : "")">
+                <div class="card h-100 @(address.IsDefault ? "address-card-default" : "")">
                     <div class="card-body">
                         @if (address.IsDefault)
                         {
-                            <span class="badge bg-primary mb-2">Основна</span>
+                            <span class="badge bg-primary mb-2">◉ Основна</span>
                         }
-                        <h5 class="card-title mb-1">@address.FirstName @address.LastName</h5>
-                        <p class="card-text mb-1 text-muted">@address.PhoneNumber</p>
-                        <p class="card-text mb-1">@address.AddressLine</p>
-                        <p class="card-text">@address.PostalCode, @address.City@(!string.IsNullOrWhiteSpace(address.Region) ? $", {address.Region}" : "")</p>
-                        <p class="card-text text-muted small">@address.Country</p>
+                        <h5 class="card-title" style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.04em;">
+                            @address.FirstName @address.LastName
+                        </h5>
+                        <p class="mb-1 small" style="color:var(--neon-cyan);font-family:'Rajdhani',sans-serif;letter-spacing:0.03em;">@address.PhoneNumber</p>
+                        <p class="mb-1 small" style="color:var(--text-muted);">@address.AddressLine</p>
+                        <p class="mb-1 small" style="color:var(--text-muted);">@address.PostalCode, @address.City@(!string.IsNullOrWhiteSpace(address.Region) ? $", {address.Region}" : "")</p>
+                        <p class="mb-0 small" style="color:var(--text-dim);">@address.Country</p>
                     </div>
-                    <div class="card-footer d-flex gap-2">
+                    <div class="card-footer d-flex gap-2 align-items-center flex-wrap">
                         <a asp-action="Edit" asp-route-id="@address.Id" class="btn btn-sm btn-outline-secondary">Редагувати</a>
                         <a asp-action="Delete" asp-route-id="@address.Id" class="btn btn-sm btn-outline-danger">Видалити</a>
                         @if (!address.IsDefault)

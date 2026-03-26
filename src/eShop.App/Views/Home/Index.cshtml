@@ -1,16 +1,96 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Головна";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome <strong id="name"></strong></h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section">
+    <div class="hero-badge">// NEXT-GEN HARDWARE STORE</div>
+    <h1 class="hero-title">NEXUS PC</h1>
+    <p class="hero-subtitle">Технології майбутнього — вже сьогодні</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a asp-controller="Product" asp-action="Index" class="btn btn-primary px-4 py-2">
+            Переглянути каталог
+        </a>
+        @if (!User.Identity?.IsAuthenticated ?? true)
+        {
+            <a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary px-4 py-2">
+                Створити акаунт
+            </a>
+        }
+    </div>
+
+    <div class="stats-strip mt-5">
+        <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Товарів</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Підтримка</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Оригінал</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">3 роки</span>
+            <span class="stat-label">Гарантія</span>
+        </div>
+    </div>
 </div>
 
-@section Scripts {
-    <script>
-        $(function() {
-            $("#name").html("KN-2");
-        });
-    </script>
-}
+<div class="features-strip">
+    <div class="feature-item">
+        <span class="feature-icon">⚡</span>
+        <span class="feature-name">Процесори</span>
+    </div>
+    <div class="feature-item">
+        <span class="feature-icon">🎮</span>
+        <span class="feature-name">Відеокарти</span>
+    </div>
+    <div class="feature-item">
+        <span class="feature-icon">💾</span>
+        <span class="feature-name">Накопичувачі</span>
+    </div>
+    <div class="feature-item">
+        <span class="feature-icon">🧠</span>
+        <span class="feature-name">Оперативна пам'ять</span>
+    </div>
+    <div class="feature-item">
+        <span class="feature-icon">🖥️</span>
+        <span class="feature-name">Монітори</span>
+    </div>
+    <div class="feature-item">
+        <span class="feature-icon">🔌</span>
+        <span class="feature-name">Блоки живлення</span>
+    </div>
+</div>
+
+<div class="row g-4 my-2">
+    <div class="col-md-4">
+        <div class="card h-100 p-1">
+            <div class="card-body">
+                <div class="text-neon-cyan mb-2" style="font-size:1.5rem">◈</div>
+                <h5 style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:0.05em;">Швидка доставка</h5>
+                <p class="small" style="color:var(--text-muted);">Доставляємо по всій Україні протягом 1-3 днів. Надійні партнери, відстеження посилки в реальному часі.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 p-1">
+            <div class="card-body">
+                <div class="text-neon-purple mb-2" style="font-size:1.5rem">◈</div>
+                <h5 style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:0.05em;">Гарантія якості</h5>
+                <p class="small" style="color:var(--text-muted);">Офіційна гарантія виробника до 3 років на всі товари. Повернення протягом 14 днів без пояснень.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 p-1">
+            <div class="card-body">
+                <div class="text-neon-green mb-2" style="font-size:1.5rem">◈</div>
+                <h5 style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:0.05em;">Технічна підтримка</h5>
+                <p class="small" style="color:var(--text-muted);">Команда досвідчених спеціалістів готова допомогти з вибором комплектуючих та складанням ПК.</p>
+            </div>
+        </div>
+    </div>
+</div>

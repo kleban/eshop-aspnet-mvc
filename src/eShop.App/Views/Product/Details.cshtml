@@ -3,67 +3,84 @@
     ViewData["Title"] = Model.Name;
 }
 
-<div class="row pt-4 pb-3 align-items-center">
-    <div class="col">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a asp-action="Index">Каталог</a></li>
-                @if (!string.IsNullOrWhiteSpace(Model.CategoryName))
-                {
-                    <li class="breadcrumb-item">
-                        <a asp-action="Index" asp-route-categoryId="@Model.CategoryId">@Model.CategoryName</a>
-                    </li>
-                }
-                <li class="breadcrumb-item active">@Model.Name</li>
-            </ol>
-        </nav>
-    </div>
+<div class="pt-3 pb-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Каталог</a></li>
+            @if (!string.IsNullOrWhiteSpace(Model.CategoryName))
+            {
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-route-categoryId="@Model.CategoryId">@Model.CategoryName</a>
+                </li>
+            }
+            <li class="breadcrumb-item active">@Model.Name</li>
+        </ol>
+    </nav>
 </div>
 
-<div class="row">
-    <div class="col-md-8">
-        <h2>@Model.Name</h2>
-        @if (!string.IsNullOrWhiteSpace(Model.Description))
-        {
-            <p class="text-muted">@Model.Description</p>
-        }
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card scan-line-container">
+            <div class="card-body p-4">
+                <span class="badge bg-secondary mb-3">@(Model.CategoryName ?? "Без категорії")</span>
+                <h2 style="font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:0.04em;">
+                    @Model.Name
+                </h2>
 
-        <dl class="row mt-3">
-            <dt class="col-sm-4">Категорія</dt>
-            <dd class="col-sm-8">@(Model.CategoryName ?? "—")</dd>
-            <dt class="col-sm-4">Тип товару</dt>
-            <dd class="col-sm-8">@Model.TypeDisplay</dd>
-            @if (!string.IsNullOrWhiteSpace(Model.BaseUnitSymbol))
-            {
-                <dt class="col-sm-4">Одиниця виміру</dt>
-                <dd class="col-sm-8">@Model.BaseUnitSymbol</dd>
-            }
-        </dl>
+                @if (!string.IsNullOrWhiteSpace(Model.Description))
+                {
+                    <p class="mt-3" style="color:var(--text-muted);font-size:0.95rem;line-height:1.7;">@Model.Description</p>
+                }
+
+                <hr class="neon-divider" />
+
+                <dl class="row detail-list mt-3">
+                    <dt class="col-sm-4">Категорія</dt>
+                    <dd class="col-sm-8">@(Model.CategoryName ?? "—")</dd>
+                    <dt class="col-sm-4">Тип товару</dt>
+                    <dd class="col-sm-8">@Model.TypeDisplay</dd>
+                    @if (!string.IsNullOrWhiteSpace(Model.BaseUnitSymbol))
+                    {
+                        <dt class="col-sm-4">Одиниця виміру</dt>
+                        <dd class="col-sm-8">@Model.BaseUnitSymbol</dd>
+                    }
+                </dl>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <div class="card shadow-sm">
-            <div class="card-body text-center">
-                <div class="fs-3 fw-bold text-primary mb-3">@Model.Price.ToString("N2") грн</div>
-                <button type="button" class="btn btn-success w-100" disabled>
-                    🛒 Додати в кошик
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body p-4 text-center">
+                <div class="mb-1" style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);">Ціна</div>
+                <div class="price-display mb-4" style="font-size:2rem;">
+                    @Model.Price.ToString("N2") <span style="font-size:1rem;color:var(--text-muted);">₴</span>
+                </div>
+                <button type="button" class="btn btn-success w-100 py-2" disabled>
+                    + Додати в кошик
                 </button>
-                <div class="text-muted small mt-2">Функція в розробці</div>
+                <div class="dev-notice mt-2">// Функція в розробці</div>
             </div>
         </div>
 
         @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
         {
-            <div class="mt-3 d-flex gap-2">
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary btn-sm">Редагувати</a>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger btn-sm">Видалити</a>
-                }
+            <div class="card mt-3">
+                <div class="card-body p-3">
+                    <div class="mb-2" style="font-family:'Rajdhani',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);">// Адміністрування</div>
+                    <div class="d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary btn-sm flex-grow-1">Редагувати</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger btn-sm flex-grow-1">Видалити</a>
+                        }
+                    </div>
+                </div>
             </div>
         }
-    </div>
-</div>
 
-<div class="mt-3">
-    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">← Назад до каталогу</a>
+        <div class="mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm w-100">← Назад до каталогу</a>
+        </div>
+    </div>
 </div>
